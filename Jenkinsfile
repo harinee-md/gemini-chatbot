@@ -32,7 +32,6 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    // Building Docker image locally
                     sh "docker build -t ${DOCKERHUB_USERNAME}/${IMAGE_NAME}:latest ."
                 }
             }
@@ -41,9 +40,17 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 script {
-                  
                     sh "docker login -u ${DOCKERHUB_USERNAME} -p Harinee@150203"
-
-                   
                     sh "docker push ${DOCKERHUB_USERNAME}/${IMAGE_NAME}:latest"
                 }
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo 'Deploying to production...'
+                sh 'echo "Deployed Successfully!"'
+            }
+        }
+    }
+}
