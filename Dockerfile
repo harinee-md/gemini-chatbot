@@ -1,14 +1,14 @@
-# Use official Python image
-FROM python:3.10-slim
+# Base image
+FROM python:3.10
 
 # Set working directory
 WORKDIR /app
 
-# Copy files
+# Copy everything to /app
 COPY . .
 
-# Install Python dependencies
-RUN pip install --upgrade pip && pip install -r requirements.txt
+# Install dependencies
+RUN pip install --no-cache-dir -r requirements.txt
 
 # Run the script
 CMD ["python", "gemini_call.py"]
